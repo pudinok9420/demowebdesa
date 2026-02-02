@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Resmi Desa</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font (formal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS External -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    body { box-sizing: border-box; }
+    .font-heading { font-family: 'Playfair Display', serif; }
+    .font-body { font-family: 'Source Sans 3', sans-serif; }
+  </style>
+</head>
+
+<body class="h-full font-body">
+  <div id="app" class="min-h-screen w-full overflow-x-hidden bg-desa">
+
+    <!-- =========================
+         HEADER (Formal)
+    ========================== -->
+    <header class="bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 text-white shadow-lg">
+      <div class="max-w-6xl mx-auto px-4 py-6">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4 min-w-0">
+            <!-- Logo Desa -->
+            <div class="w-16 h-16 bg-white/20 rounded-full overflow-hidden flex items-center justify-center backdrop-blur-sm border border-white/20">
+              <img id="desa-logo" src="./assets/logo-desa.png" alt="Logo Desa" class="w-full h-full object-cover">
+            </div>
+
+            <div class="min-w-0">
+              <h1 id="village-name" class="font-heading text-2xl md:text-3xl font-bold truncate">Desa Ciasihan</h1>
+              <p id="welcome-text" class="text-emerald-100 text-sm md:text-base truncate">Website resmi pemerintahan desa Ciasihan</p>
+            </div>
+          </div>
+
+          <!-- Admin button -->
+          <button id="admin-btn"
+            class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-medium transition-all backdrop-blur-sm flex items-center gap-2 border border-white/20">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+              </path>
+            </svg>
+            <span id="admin-btn-text">Admin</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center gap-1 py-2 overflow-x-auto">
+          <button class="nav-btn active px-4 py-2 rounded-lg text-sm font-medium text-emerald-700 bg-emerald-100"
+            data-section="beranda">🏠 Beranda</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="profil">📋 Profil</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="berita">📰 Berita</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="pengumuman">📢 Pengumuman</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="agenda">📅 Agenda</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="apbdes">💰 APBDes</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="statistik">📊 Statistik</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="potensi">🌟 Potensi & UMKM</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="galeri">📷 Galeri</button>
+
+          <button class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
+            data-section="kontak">📞 Kontak</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+
+      <!-- =========================
+           ADMIN PANEL
+      ========================== -->
+      <div id="admin-panel"
+        class="hidden mb-6 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl p-6 shadow-lg">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">👨‍💼</div>
+            <div>
+              <p class="font-bold text-lg">Mode Admin Aktif</p>
+              <p class="text-emerald-100 text-sm">Kelola konten & data resmi desa</p>
+            </div>
+          </div>
+
+          <div class="flex gap-3 flex-wrap">
+            <button id="add-content-btn"
+              class="bg-white text-emerald-700 px-5 py-3 rounded-xl font-medium hover:bg-emerald-50 transition-all shadow-lg">
+              ➕ Tambah Konten
+            </button>
+
+            <button id="open-apbdes-manager-btn"
+              class="bg-white/20 text-white px-5 py-3 rounded-xl font-medium hover:bg-white/30 transition-all shadow-lg border border-white/20">
+              💰 Kelola APBDes
+            </button>
+
+            <button id="open-settings-btn"
+              class="bg-white/20 text-white px-5 py-3 rounded-xl font-medium hover:bg-white/30 transition-all shadow-lg border border-white/20">
+              ⚙️ Pengaturan Desa
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================
+           SECTION: BERANDA (Formal + Banner)
+      ========================== -->
+      <section id="section-beranda" class="mb-12">
+        <div class="rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500">
+
+          <!-- Banner image -->
+          <img id="desa-banner" src="./assets/banner-desa.jpg" alt="Gambar Desa"
+            class="absolute inset-0 w-full h-full object-cover opacity-25">
+          <div class="absolute inset-0 bg-black/20"></div>
+
+          <div class="relative z-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div class="max-w-2xl">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-3">Portal Informasi Resmi Desa</h2>
+                <p class="text-emerald-100 text-lg md:text-xl">
+                  Transparansi • Pelayanan • Informasi • Dokumentasi
+                </p>
+              </div>
+
+              <!-- Foto Kepala Desa -->
+              <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-4 border border-white/20 w-full md:w-auto">
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden border border-white/30 bg-white/10">
+                    <img id="foto-kades" src="./assets/kades.jpg" alt="Kepala Desa" class="w-full h-full object-cover">
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-sm text-emerald-100">Kepala Desa</p>
+                    <p id="nama-kades" class="font-bold text-lg leading-tight truncate">Budi Santoso</p>
+                    <p id="periode-kades" class="text-xs text-emerald-100">Periode 2024–2030</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Statistik ringkas (Beranda) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center border border-white/15">
+                <p class="text-2xl font-bold" id="stat-penduduk">0</p>
+                <p class="text-emerald-100 text-sm">Penduduk</p>
+              </div>
+              <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center border border-white/15">
+                <p class="text-2xl font-bold" id="stat-rtrw">0</p>
+                <p class="text-emerald-100 text-sm">RT/RW</p>
+              </div>
+              <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center border border-white/15">
+                <p class="text-2xl font-bold" id="stat-hektar">0</p>
+                <p class="text-emerald-100 text-sm">Luas (Ha)</p>
+              </div>
+              <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center border border-white/15">
+                <p class="text-2xl font-bold" id="stat-program">0</p>
+                <p class="text-emerald-100 text-sm">Program</p>
+              </div>
+            </div>
+
+            <!-- ✅ Update Terbaru (Beranda) -->
+            <div class="mt-10">
+              <div class="flex items-end justify-between gap-3 mb-4">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white">Update Terbaru</h3>
+                  <p class="text-emerald-100 text-sm">Berita, pengumuman, dan agenda terbaru</p>
+                </div>
+              </div>
+
+              <div id="beranda-latest" class="grid md:grid-cols-3 gap-4">
+                <!-- di-render oleh app.js -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: PROFIL
+      ========================== -->
+      <section id="section-profil" class="hidden mb-12">
+        <div class="grid lg:grid-cols-3 gap-6">
+          <!-- Card Visi Misi -->
+          <div class="lg:col-span-2 bg-white rounded-3xl shadow-lg border border-gray-100 p-6 md:p-8">
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800 mb-4">Profil Desa</h2>
+
+            <div class="grid md:grid-cols-2 gap-5">
+              <div class="rounded-2xl p-5 bg-emerald-50 border border-emerald-100">
+                <h3 class="font-heading text-xl font-bold text-emerald-900 mb-2">Visi</h3>
+                <p id="visi-display" class="text-gray-700 leading-relaxed">
+                  Mewujudkan Desa Sejahtera yang Maju, Mandiri, dan Berkeadilan.
+                </p>
+              </div>
+
+              <div class="rounded-2xl p-5 bg-teal-50 border border-teal-100">
+                <h3 class="font-heading text-xl font-bold text-teal-900 mb-2">Misi</h3>
+                <p id="misi-display" class="text-gray-700 leading-relaxed">
+                  Meningkatkan pelayanan publik dan ekonomi desa berbasis potensi lokal.
+                </p>
+              </div>
+            </div>
+
+            <!-- Konten Profil Tambahan (dari Firestore contents type=profil) -->
+            <div class="mt-8">
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <h3 class="font-heading text-xl font-bold text-gray-800">Informasi Profil Tambahan</h3>
+                <p class="text-sm text-gray-500">Diisi Admin</p>
+              </div>
+
+              <div id="profil-container" class="grid gap-4">
+                <!-- di-render oleh app.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Perangkat Ringkas -->
+          <div class="bg-gradient-to-br from-emerald-700 to-teal-700 rounded-3xl shadow-lg p-6 md:p-8 text-white">
+            <h3 class="font-heading text-xl font-bold mb-4">Perangkat Desa</h3>
+            <p class="text-emerald-100 text-sm mb-6">Struktur pemerintahan desa (ringkas)</p>
+
+            <div id="perangkat-list" class="space-y-3">
+              <!-- di-render oleh app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Struktur Organisasi -->
+        <div class="mt-8">
+          <div class="flex items-end justify-between gap-3 mb-4">
+            <div>
+              <h3 class="font-heading text-2xl font-bold text-gray-800">Struktur Organisasi</h3>
+              <p class="text-gray-500 text-sm">Daftar perangkat & jabatan</p>
+            </div>
+          </div>
+
+          <div id="struktur-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- di-render oleh app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: BERITA
+      ========================== -->
+      <section id="section-berita" class="hidden mb-12">
+        <div class="flex items-end justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Berita Desa</h2>
+            <p class="text-gray-500 text-sm">Informasi terbaru seputar kegiatan desa</p>
+          </div>
+        </div>
+
+        <div id="berita-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: PENGUMUMAN
+      ========================== -->
+      <section id="section-pengumuman" class="hidden mb-12">
+        <div class="flex items-end justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Pengumuman</h2>
+            <p class="text-gray-500 text-sm">Informasi penting untuk masyarakat</p>
+          </div>
+        </div>
+
+        <div id="pengumuman-container" class="grid gap-4">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: AGENDA
+      ========================== -->
+      <section id="section-agenda" class="hidden mb-12">
+        <div class="flex items-end justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Agenda Desa</h2>
+            <p class="text-gray-500 text-sm">Jadwal kegiatan & acara desa</p>
+          </div>
+        </div>
+
+        <div id="agenda-container" class="grid gap-4">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: APBDes
+      ========================== -->
+      <section id="section-apbdes" class="hidden mb-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">APBDes</h2>
+            <p class="text-gray-500 text-sm">Transparansi anggaran pendapatan & belanja desa</p>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 w-full md:w-auto">
+            <label class="block text-xs font-semibold text-gray-600 mb-2">Filter Tahun</label>
+            <select id="apbdes-year-filter"
+              class="w-full md:w-56 px-3 py-2 border border-gray-300 rounded-xl bg-white">
+              <option value="all">Semua Tahun</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="apbdes-container">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: STATISTIK
+      ========================== -->
+      <section id="section-statistik" class="hidden mb-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Statistik Desa</h2>
+            <p class="text-gray-500 text-sm">Data ringkas & informasi statistik</p>
+          </div>
+
+          <!-- Tabs Statistik -->
+          <div class="flex gap-2 flex-wrap">
+            <button class="stat-tab is-active px-4 py-2 rounded-xl bg-emerald-100 text-emerald-700 font-medium"
+              data-tab="demografi">Demografi</button>
+            <button class="stat-tab px-4 py-2 rounded-xl bg-white text-gray-700 border border-gray-200 font-medium"
+              data-tab="pendidikan">Pendidikan</button>
+            <button class="stat-tab px-4 py-2 rounded-xl bg-white text-gray-700 border border-gray-200 font-medium"
+              data-tab="ekonomi">Ekonomi</button>
+            <button class="stat-tab px-4 py-2 rounded-xl bg-white text-gray-700 border border-gray-200 font-medium"
+              data-tab="kesehatan">Kesehatan</button>
+          </div>
+        </div>
+
+        <div id="statistik-container">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: POTENSI
+      ========================== -->
+      <section id="section-potensi" class="hidden mb-12">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Potensi & UMKM</h2>
+            <p class="text-gray-500 text-sm">Potensi desa, UMKM, wisata, pertanian, dll.</p>
+          </div>
+
+          <!-- Tabs Potensi -->
+          <div class="flex gap-2 flex-wrap">
+            <button class="pot-tab is-active px-4 py-2 rounded-xl bg-emerald-100 text-emerald-700 font-medium"
+              data-tab="umkm">UMKM</button>
+            <button class="pot-tab px-4 py-2 rounded-xl bg-white text-gray-700 border border-gray-200 font-medium"
+              data-tab="wisata">Wisata</button>
+            <button class="pot-tab px-4 py-2 rounded-xl bg-white text-gray-700 border border-gray-200 font-medium"
+              data-tab="pertanian">Pertanian</button>
+            <button class="pot-tab px-4 py-2 rounded-xl bg-white text-gray-700 border border-gray-200 font-medium"
+              data-tab="peternakan">Peternakan</button>
+          </div>
+        </div>
+
+        <div id="potensi-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: GALERI
+      ========================== -->
+      <section id="section-galeri" class="hidden mb-12">
+        <div class="flex items-end justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Galeri Kegiatan</h2>
+            <p class="text-gray-500 text-sm">Dokumentasi foto kegiatan desa</p>
+          </div>
+        </div>
+
+        <div id="galeri-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <!-- di-render oleh app.js -->
+        </div>
+      </section>
+
+      <!-- =========================
+           SECTION: KONTAK
+      ========================== -->
+      <section id="section-kontak" class="hidden mb-12">
+        <div class="flex items-end justify-between gap-3 mb-5">
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-800">Kontak & Layanan</h2>
+            <p class="text-gray-500 text-sm">Informasi kontak resmi & lokasi kantor desa</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <!-- Kontak Card -->
+          <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 md:p-8">
+            <h3 class="font-heading text-xl font-bold text-gray-800 mb-4">Kantor Desa</h3>
+
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <span class="text-xl">📍</span>
+                <div>
+                  <p class="font-semibold text-gray-800">Alamat</p>
+                  <p id="desa-alamat" class="text-gray-600 text-sm">-</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="text-xl">📞</span>
+                <div>
+                  <p class="font-semibold text-gray-800">Telepon</p>
+                  <p id="desa-telepon" class="text-gray-600 text-sm">-</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="text-xl">✉️</span>
+                <div>
+                  <p class="font-semibold text-gray-800">Email</p>
+                  <p id="desa-email" class="text-gray-600 text-sm">-</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="text-xl">🕐</span>
+                <div>
+                  <p class="font-semibold text-gray-800">Jam Operasional</p>
+                  <p id="desa-jam" class="text-gray-600 text-sm">-</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 rounded-2xl overflow-hidden border border-gray-200">
+              <iframe
+                id="desa-map"
+                src="https://www.google.com/maps?q=desa%20indonesia&output=embed"
+                width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+
+          <!-- Perangkat Card -->
+          <div class="bg-gradient-to-br from-emerald-700 to-teal-700 rounded-3xl shadow-lg p-6 md:p-8 text-white">
+            <h3 class="font-heading text-xl font-bold mb-2">Perangkat Desa</h3>
+            <p class="text-emerald-100 text-sm mb-5">Daftar perangkat desa (ringkas)</p>
+
+            <div id="perangkat-list-2" class="space-y-3">
+              <div class="p-3 rounded-2xl bg-white/10 border border-white/15 text-emerald-100 text-sm">
+                Data perangkat akan tampil otomatis.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="bg-gray-900 text-white py-10">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <div class="flex items-center justify-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-full overflow-hidden border border-white/20 bg-white/10">
+            <img id="footer-logo" src="./assets/logo-desa.png" alt="Logo Desa" class="w-full h-full object-cover">
+          </div>
+          <div class="text-left">
+            <p class="font-heading font-bold text-lg leading-tight" id="footer-village-name">Desa Ciasihan</p>
+            <p class="text-gray-400 text-sm">Portal Informasi Resmi</p>
+          </div>
+        </div>
+
+        <p id="footer-text" class="text-gray-400 text-sm">
+          © 2026 Desa Ciasihan. Hak Cipta Dilindungi.
+        </p>
+      </div>
+    </footer>
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+    <div id="toast"
+      class="fixed bottom-4 right-4 bg-emerald-600 text-white px-5 py-3 rounded-2xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+      <span id="toast-message">Berhasil!</span>
+    </div>
+
+    <!-- =========================
+         LOADING
+    ========================== -->
+    <div id="loading" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center">
+      <div class="bg-white rounded-2xl p-6 shadow-xl flex items-center gap-3">
+        <div class="w-6 h-6 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+        <span class="text-gray-700 font-medium">Memproses...</span>
+      </div>
+    </div>
+
+    <!-- =========================
+         MODAL: LOGIN ADMIN
+    ========================== -->
+    <div id="login-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8">
+        <div class="text-center mb-6">
+          <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">🔐</div>
+          <h2 class="font-heading text-2xl font-bold text-gray-800">Login Admin</h2>
+          <p class="text-gray-500 text-sm mt-1">Masuk untuk mengelola konten website</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="text" id="login-username"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+              placeholder="admin@email.com">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input type="password" id="login-password"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+              placeholder="••••••••">
+          </div>
+
+          <p id="login-error" class="text-red-500 text-sm hidden">Email atau password salah!</p>
+
+          <div class="flex gap-3 pt-2">
+            <button id="login-cancel"
+              class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-all font-medium">Batal</button>
+            <button id="login-submit"
+              class="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-medium">Masuk</button>
+          </div>
+
+          <p class="text-xs text-gray-400 bg-gray-50 p-3 rounded-2xl">
+            💡 Hanya admin yang memiliki akun Firebase Auth yang bisa login.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+         MODAL: TAMBAH / EDIT KONTEN
+         NOTE: Gambar hanya LINK + MULTI LINK
+    ========================== -->
+    <div id="content-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl p-6 md:p-8 max-h-[92%] overflow-y-auto">
+        <h2 id="modal-title" class="font-heading text-2xl font-bold text-gray-800 mb-6">Tambah Konten</h2>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+            <select id="content-type"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white">
+              <option value="berita">📰 Berita</option>
+              <option value="pengumuman">📢 Pengumuman</option>
+              <option value="agenda">📅 Agenda</option>
+              <option value="profil">📋 Profil</option>
+              <option value="statistik">📊 Statistik</option>
+              <option value="potensi">🌟 Potensi</option>
+              <option value="galeri">📷 Galeri</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Judul</label>
+            <input type="text" id="content-title"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              placeholder="Masukkan judul">
+          </div>
+
+          <!-- PROFIL fields -->
+          <div id="profil-fields" class="hidden">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Sub-Kategori Profil</label>
+            <select id="profil-section"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+              <option value="sejarah">📜 Sejarah</option>
+              <option value="geografis">🗺️ Geografis</option>
+              <option value="demografi">👥 Demografi</option>
+              <option value="potensi">🌟 Potensi</option>
+            </select>
+          </div>
+
+          <!-- STATISTIK fields -->
+          <div id="statistik-fields" class="hidden">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Statistik</label>
+            <select id="statistik-jenis"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+              <option value="demografi">👥 Demografi</option>
+              <option value="pendidikan">🎓 Pendidikan</option>
+              <option value="ekonomi">💼 Ekonomi</option>
+              <option value="kesehatan">🏥 Kesehatan</option>
+            </select>
+          </div>
+
+          <!-- POTENSI fields -->
+          <div id="potensi-fields" class="hidden">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Kategori Potensi</label>
+            <select id="potensi-kategori"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+              <option value="umkm">🛍️ UMKM</option>
+              <option value="wisata">🗺️ Wisata</option>
+              <option value="pertanian">🌾 Pertanian</option>
+              <option value="peternakan">🐄 Peternakan</option>
+            </select>
+          </div>
+
+          <!-- GAMBAR LINK (MULTI) -->
+          <div id="image-field">
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <label class="block text-sm font-medium text-gray-700">Link Gambar (bisa banyak)</label>
+              <button type="button" id="add-image-link"
+                class="px-3 py-2 rounded-xl bg-emerald-100 text-emerald-700 font-medium hover:bg-emerald-200 transition-all text-sm">
+                ➕ Tambah Link
+              </button>
+            </div>
+
+            <p class="text-xs text-gray-500 mb-3">
+              Masukkan URL gambar (contoh: dari Google Drive publik, Imgur, hosting, atau Firebase Storage URL).
+            </p>
+
+            <div id="image-links-wrap" class="space-y-3">
+              <!-- Row 1 (default) -->
+              <div class="image-link-row flex gap-2 items-start">
+                <input type="url" class="image-link-input flex-1 px-4 py-3 border border-gray-300 rounded-2xl"
+                  placeholder="https://...">
+                <button type="button" class="remove-image-link hidden px-3 py-3 rounded-2xl bg-red-100 text-red-700 hover:bg-red-200">
+                  ✖
+                </button>
+              </div>
+            </div>
+
+            <!-- Preview area -->
+            <div id="image-links-preview" class="hidden mt-4">
+              <p class="text-xs text-gray-500 mb-2">Preview:</p>
+              <div id="image-preview-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+            </div>
+          </div>
+
+          <!-- Tanggal -->
+          <div id="date-field">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Publikasi</label>
+            <input type="date" id="published-date"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Konten/Keterangan</label>
+            <textarea id="content-body" rows="6"
+              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none"
+              placeholder="Masukkan isi konten..."></textarea>
+          </div>
+
+          <div class="flex gap-3 pt-2">
+            <button id="content-cancel"
+              class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-all font-medium">
+              Batal
+            </button>
+            <button id="content-save"
+              class="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 transition-all font-medium">
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+         MODAL: DELETE CONFIRM
+    ========================== -->
+    <div id="delete-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center">
+        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">🗑️</div>
+        <h3 class="font-heading text-xl font-bold text-gray-800 mb-2">Hapus Data?</h3>
+        <p class="text-gray-500 mb-6">Data yang dihapus tidak dapat dikembalikan.</p>
+        <div class="flex gap-3">
+          <button id="delete-cancel"
+            class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-50 transition-all font-medium">Batal</button>
+          <button id="delete-confirm"
+            class="flex-1 px-4 py-3 bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-all font-medium">Hapus</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+         MODAL: APBDes MANAGER (Admin)
+    ========================== -->
+    <div id="apbdes-manager-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl p-6 md:p-8 max-h-[92%] overflow-y-auto">
+        <div class="flex items-center justify-between gap-3 mb-6 flex-wrap">
+          <div>
+            <h2 class="font-heading text-2xl font-bold text-gray-800">Kelola APBDes</h2>
+            <p class="text-gray-500 text-sm">Input total → pembagian sektor → sub-kegiatan</p>
+          </div>
+          <div class="flex gap-2">
+            <button id="apbdes-manager-close" class="px-4 py-2 rounded-2xl border border-gray-300 text-gray-700 hover:bg-gray-50">Tutup</button>
+            <button id="apbdes-save-year" class="px-4 py-2 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700">Simpan</button>
+          </div>
+        </div>
+
+        <!-- Tahun + Total -->
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="bg-gray-50 rounded-3xl p-4 border border-gray-200">
+            <label class="text-sm font-medium text-gray-700">Tahun</label>
+            <select id="apbdes-year" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white">
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+            </select>
+          </div>
+
+          <div class="md:col-span-2 bg-emerald-50 rounded-3xl p-4 border border-emerald-200">
+            <label class="text-sm font-medium text-emerald-800">Total APBDes (Rp)</label>
+            <input id="apbdes-total" type="text"
+              class="mt-2 w-full px-4 py-3 border border-emerald-300 rounded-2xl bg-white"
+              placeholder="Contoh: 1947729000">
+            <p class="text-xs text-emerald-700 mt-2">Sektor dihitung berdasarkan persen.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-3 flex-wrap mb-5">
+          <div id="apbdes-manager-summary" class="text-sm text-gray-600"></div>
+          <button id="apbdes-reset-year"
+            class="px-4 py-2 rounded-2xl border border-gray-300 text-gray-700 hover:bg-gray-50">
+            Reset Template
+          </button>
+        </div>
+
+        <!-- Sektor list -->
+        <div class="bg-white rounded-3xl border border-gray-200 p-5">
+          <div class="flex items-center justify-between gap-3 flex-wrap mb-4">
+            <h3 class="font-heading text-xl font-bold text-gray-800">Pembagian Sektor</h3>
+            <button id="apbdes-add-sector" class="px-4 py-2 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700">➕ Tambah Sektor</button>
+          </div>
+
+          <div id="apbdes-sectors-wrap" class="space-y-3">
+            <!-- render JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+         MODAL: SETTINGS (Admin)
+         ✅ Semua bisa diubah dari sini (Visi-Misi, logo/banner/kades, statistik, kontak, perangkat)
+    ========================== -->
+    <div id="settings-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl p-6 md:p-8 max-h-[92%] overflow-y-auto">
+        <div class="flex items-center justify-between gap-3 mb-6 flex-wrap">
+          <div>
+            <h2 class="font-heading text-2xl font-bold text-gray-800">Pengaturan Desa</h2>
+            <p class="text-gray-500 text-sm">Identitas desa, profil, kontak, perangkat, dan statistik ringkas</p>
+          </div>
+          <div class="flex gap-2">
+            <button id="settings-close" class="px-4 py-2 rounded-2xl border border-gray-300 text-gray-700 hover:bg-gray-50">Tutup</button>
+            <button id="settings-save" class="px-4 py-2 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700">Simpan</button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- IDENTITAS + PROFIL -->
+          <div class="bg-gray-50 rounded-3xl p-5 border border-gray-200">
+            <h3 class="font-heading text-lg font-bold text-gray-800 mb-4">Identitas & Profil</h3>
+
+            <label class="text-sm font-medium text-gray-700">Nama Desa</label>
+            <input id="set-village-name" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Nama desa">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Teks Sambutan</label>
+            <input id="set-welcome-text" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Teks sambutan">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Footer</label>
+            <input id="set-footer-text" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Teks footer">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Visi</label>
+            <textarea id="set-visi" rows="3"
+              class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white"
+              placeholder="Tulis visi desa..."></textarea>
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Misi</label>
+            <textarea id="set-misi" rows="3"
+              class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white"
+              placeholder="Tulis misi desa..."></textarea>
+
+            <!-- KEPALA DESA -->
+            <div class="mt-6">
+              <h4 class="font-heading text-base font-bold text-gray-800 mb-3">Kepala Desa</h4>
+
+              <label class="text-sm font-medium text-gray-700">Nama Kepala Desa</label>
+              <input id="set-kades-name" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Nama kepala desa">
+
+              <label class="text-sm font-medium text-gray-700 mt-4 block">Periode</label>
+              <input id="set-kades-period" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Contoh: Periode 2024–2030">
+            </div>
+
+            <!-- MEDIA (URL) -->
+            <div class="mt-6">
+              <h4 class="font-heading text-base font-bold text-gray-800 mb-3">Gambar (Link URL)</h4>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">Link Logo</label>
+                  <input id="set-logo-url" class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-xl bg-white" placeholder="https://...">
+                  <div class="mt-3 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 aspect-square">
+                    <img id="set-logo-preview" alt="Preview Logo" class="w-full h-full object-cover">
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">Link Banner</label>
+                  <input id="set-banner-url" class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-xl bg-white" placeholder="https://...">
+                  <div class="mt-3 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 aspect-square">
+                    <img id="set-banner-preview" alt="Preview Banner" class="w-full h-full object-cover">
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">Link Foto Kades</label>
+                  <input id="set-kades-url" class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-xl bg-white" placeholder="https://...">
+                  <div class="mt-3 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 aspect-square">
+                    <img id="set-kades-preview" alt="Preview Foto Kades" class="w-full h-full object-cover">
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-[11px] text-gray-500 mt-3">
+                Tips: pakai link langsung gambar (.jpg/.png) atau URL Firebase Storage yang sudah public.
+              </p>
+            </div>
+
+            <!-- STAT RINGKAS -->
+            <div class="mt-6">
+              <h4 class="font-heading text-base font-bold text-gray-800 mb-3">Statistik Ringkas (Beranda)</h4>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">Penduduk</label>
+                  <input id="set-stat-penduduk" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Contoh: 12000">
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">RT/RW</label>
+                  <input id="set-stat-rtrw" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Contoh: 25/7">
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">Luas (Ha)</label>
+                  <input id="set-stat-hektar" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Contoh: 520">
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-gray-200">
+                  <label class="text-sm font-medium text-gray-700">Program</label>
+                  <input id="set-stat-program" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white" placeholder="Contoh: 12">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KONTAK -->
+          <div class="bg-gray-50 rounded-3xl p-5 border border-gray-200">
+            <h3 class="font-heading text-lg font-bold text-gray-800 mb-4">Kontak</h3>
+
+            <label class="text-sm font-medium text-gray-700">Alamat</label>
+            <input id="set-alamat" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Telepon</label>
+            <input id="set-telepon" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Email</label>
+            <input id="set-email" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Jam Operasional</label>
+            <input id="set-jam" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white">
+
+            <label class="text-sm font-medium text-gray-700 mt-4 block">Google Maps Embed (src)</label>
+            <input id="set-map-src" class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-2xl bg-white"
+              placeholder="https://www.google.com/maps/embed?pb=...">
+            <div class="mt-4 rounded-2xl overflow-hidden border border-gray-200 bg-white">
+              <iframe id="set-map-preview" src="https://www.google.com/maps?q=desa%20indonesia&output=embed"
+                width="100%" height="220" style="border:0;" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- PERANGKAT -->
+        <div class="bg-white rounded-3xl p-5 border border-gray-200 mt-6">
+          <h3 class="font-heading text-lg font-bold text-gray-800 mb-4">Perangkat Desa</h3>
+          <div class="flex items-center justify-between gap-3 flex-wrap mb-4">
+            <p class="text-sm text-gray-500">Tambah/ubah perangkat desa (nama, jabatan, foto URL)</p>
+            <button id="add-perangkat-btn" class="px-4 py-2 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700">➕ Tambah Perangkat</button>
+          </div>
+
+          <div id="set-perangkat-wrap" class="space-y-3">
+            <!-- render JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JS External -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
